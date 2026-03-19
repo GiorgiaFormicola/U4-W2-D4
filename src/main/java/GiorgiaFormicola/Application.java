@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -15,7 +16,7 @@ public class Application {
     private final static Logger logger = LoggerFactory.getLogger("");
 
     public static void main(String[] args) {
-        logger.info("APPLICATION STARTED \n");
+        logger.info("APPLICATION STARTED");
 
 
         List<Product> productsList1 = Arrays.asList(
@@ -49,6 +50,7 @@ public class Application {
                 new Order(productsList2, customer3)
         );
 
+        System.out.println("\n---------------------------------------------------------------------------------------------");
         logger.info("EXERCISE 1\n");
 
         System.out.println("ORDERS LIST");
@@ -64,7 +66,7 @@ public class Application {
             orders.forEach(order -> System.out.println("OrderID = " + order.getId() + " -> Products List: " + order.getProducts().stream().map(product -> product.getName()).toList()));
         }));
 
-        System.out.println();
+        System.out.println("\n---------------------------------------------------------------------------------------------");
         logger.info("EXERCISE 2\n");
         System.out.println("ORDERS LIST");
         ordersList.forEach(order -> System.out.println("Order ID = " + order.getId() + ", Customer = " + order.getCustomer().getName() + " -> Total Cost: " + order.calculateTotalCost()));
@@ -75,6 +77,17 @@ public class Application {
 
         System.out.println("\nCUSTOMER TOTAL SPENDING");
         orderTotalSpendingForEachCustomer.forEach((customer, totalSpending) -> System.out.println("Customer = " + customer.getName() + " -> Total Spending: " + totalSpending));
+
+        System.out.println("\n---------------------------------------------------------------------------------------------");
+        logger.info("EXERCISE 3\n");
+        System.out.println("PRODUCTS LIST");
+        productsList1.forEach(product -> System.out.println(product));
+
+        List<Product> top3MostExpensiveProducts = productsList1.stream().sorted(Comparator.comparing(Product::getPrice).reversed()).limit(3).toList();
+
+
+        System.out.println("\nTOP 3 MOST EXPENSIVE PRODUCTS");
+        top3MostExpensiveProducts.forEach(product -> System.out.println(product));
 
 
         System.out.println();
