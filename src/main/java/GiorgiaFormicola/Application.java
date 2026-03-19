@@ -6,10 +6,7 @@ import GiorgiaFormicola.entities.Product;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Application {
@@ -88,6 +85,16 @@ public class Application {
 
         System.out.println("\nTOP 3 MOST EXPENSIVE PRODUCTS");
         top3MostExpensiveProducts.forEach(product -> System.out.println(product));
+
+        System.out.println("\n---------------------------------------------------------------------------------------------");
+        logger.info("EXERCISE 4\n");
+
+        System.out.println("ORDERS LIST");
+        ordersList.forEach(order -> System.out.println("Order ID = " + order.getId() + " -> Total Cost: " + order.calculateTotalCost()));
+
+        OptionalDouble ordersAverageCost = ordersList.stream().mapToDouble(order -> order.calculateTotalCost()).average();
+        System.out.println("\nAVERAGE COST OF THE ORDERS");
+        System.out.println(ordersAverageCost.getAsDouble());
 
 
         System.out.println();
