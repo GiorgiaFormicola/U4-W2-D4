@@ -115,10 +115,10 @@ public class Application {
         System.out.println("PRODUCTS LIST");
         productsList1.forEach(product -> System.out.println(product));
 
-        Map<String, Double> productsByCategory = productsList1.stream().collect(Collectors.groupingBy(product -> product.getCategory(), Collectors.summingDouble(product -> product.getPrice())));
+        Map<String, Double> productsPricesSumByCategory = productsList1.stream().collect(Collectors.groupingBy(product -> product.getCategory(), Collectors.summingDouble(product -> product.getPrice())));
 
         System.out.println("\nTOTAL OF PRICES FOR EACH CATEGORY");
-        productsByCategory.forEach((category, totalOfPrices) -> {
+        productsPricesSumByCategory.forEach((category, totalOfPrices) -> {
                     System.out.println("CATEGORY: " + category + " -> Total of prices = " + totalOfPrices);
                 }
         );
