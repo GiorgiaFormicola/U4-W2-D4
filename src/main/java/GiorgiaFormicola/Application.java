@@ -93,8 +93,22 @@ public class Application {
         ordersList.forEach(order -> System.out.println("Order ID = " + order.getId() + " -> Total Cost: " + order.calculateTotalCost()));
 
         OptionalDouble ordersAverageCost = ordersList.stream().mapToDouble(order -> order.calculateTotalCost()).average();
+
         System.out.println("\nAVERAGE COST OF THE ORDERS");
         System.out.println(ordersAverageCost.getAsDouble());
+
+        System.out.println("\n---------------------------------------------------------------------------------------------");
+        logger.info("EXERCISE 5\n");
+        System.out.println("PRODUCTS LIST");
+        productsList1.forEach(product -> System.out.println(product));
+
+        Map<String, Double> productsByCategory = productsList1.stream().collect(Collectors.groupingBy(product -> product.getCategory(), Collectors.summingDouble(product -> product.getPrice())));
+
+        System.out.println("\nTOTAL OF PRICES FOR EACH CATEGORY");
+        productsByCategory.forEach((category, totalOfPrices) -> {
+                    System.out.println("CATEGORY: " + category + " -> Total of prices = " + totalOfPrices);
+                }
+        );
 
 
         System.out.println();
