@@ -70,11 +70,12 @@ public class Order {
     public String toString() {
         return "Order{" +
                 "id=" + id +
-                ", status='" + status + '\'' +
+                ", customer= " + customer +
+                ", status='" + status +
                 ", orderDate=" + orderDate +
                 ", deliveryDate=" + deliveryDate +
                 ", products=" + products +
-                ", customer=" + customer +
+
                 '}';
     }
 }
