@@ -94,12 +94,12 @@ public class Application {
 
         OptionalDouble ordersAverageCost = ordersList.stream().mapToDouble(order -> order.calculateTotalCost()).average();
 
-        System.out.println("\nAVERAGE COST OF THE ORDERS");
+        System.out.println("\nAVERAGE COST OF THE ORDERS (Total cost/number of orders)");
         System.out.println(ordersAverageCost.getAsDouble());
 
         OptionalDouble orderProductsAveragePrice = ordersList.stream().map(order -> order.getProducts()).flatMap(products -> products.stream()).mapToDouble(product -> product.getPrice()).average();
 
-        System.out.println("\nAVERAGE COST OF PRODUCTS ORDERED");
+        System.out.println("\nAVERAGE COST OF PRODUCTS ORDERED (Total cost/number of products)");
         System.out.println(orderProductsAveragePrice.getAsDouble());
 
 
