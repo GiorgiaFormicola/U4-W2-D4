@@ -81,15 +81,25 @@ public class Application {
         System.out.println("PRODUCTS LIST");
         productsList1.forEach(product -> System.out.println(product));
 
-        List<Product> top3MostExpensiveProducts = productsList1.stream().sorted(Comparator.comparing(Product::getPrice).reversed()).limit(5).toList();
+        List<Product> top3MostExpensiveProducts = productsList1
+                .stream()
+                .sorted(Comparator.comparing(Product::getPrice).reversed())
+                .limit(5)
+                .toList();
 
 
         System.out.println("\nTOP 5 MOST EXPENSIVE PRODUCTS");
         top3MostExpensiveProducts.forEach(product -> System.out.println(product));
 
-        Double maxPrice = productsList1.stream().mapToDouble(product -> product.getPrice()).max().getAsDouble();
+        Double maxPrice = productsList1
+                .stream()
+                .mapToDouble(product -> product.getPrice())
+                .max().getAsDouble();
 
-        List<Product> mostExpensiveProducts = productsList1.stream().filter(product -> product.getPrice().equals(maxPrice)).toList();
+        List<Product> mostExpensiveProducts = productsList1
+                .stream()
+                .filter(product -> product.getPrice().equals(maxPrice))
+                .toList();
 
         System.out.println("\nMOST EXPENSIVE PRODUCTS");
         mostExpensiveProducts.forEach(product -> System.out.println(product));
@@ -100,12 +110,20 @@ public class Application {
         System.out.println("ORDERS LIST");
         ordersList.forEach(order -> System.out.println("Order ID = " + order.getId() + " -> Total Cost: " + order.calculateTotalCost()));
 
-        OptionalDouble ordersAverageCost = ordersList.stream().mapToDouble(order -> order.calculateTotalCost()).average();
+        OptionalDouble ordersAverageCost = ordersList
+                .stream()
+                .mapToDouble(order -> order.calculateTotalCost())
+                .average();
 
         System.out.println("\nAVERAGE COST OF THE ORDERS (Total cost/number of orders)");
         System.out.println(ordersAverageCost.getAsDouble());
 
-        OptionalDouble orderProductsAveragePrice = ordersList.stream().map(order -> order.getProducts()).flatMap(products -> products.stream()).mapToDouble(product -> product.getPrice()).average();
+        OptionalDouble orderProductsAveragePrice = ordersList
+                .stream()
+                .map(order -> order.getProducts())
+                .flatMap(products -> products.stream())
+                .mapToDouble(product -> product.getPrice())
+                .average();
 
         System.out.println("\nAVERAGE COST OF PRODUCTS ORDERED (Total cost/number of products)");
         System.out.println(orderProductsAveragePrice.getAsDouble());
@@ -115,7 +133,9 @@ public class Application {
         System.out.println("PRODUCTS LIST");
         productsList1.forEach(product -> System.out.println(product));
 
-        Map<String, Double> productsPricesSumByCategory = productsList1.stream().collect(Collectors.groupingBy(product -> product.getCategory(), Collectors.summingDouble(product -> product.getPrice())));
+        Map<String, Double> productsPricesSumByCategory = productsList1
+                .stream()
+                .collect(Collectors.groupingBy(product -> product.getCategory(), Collectors.summingDouble(product -> product.getPrice())));
 
         System.out.println("\nTOTAL OF PRICES FOR EACH CATEGORY");
         productsPricesSumByCategory.forEach((category, totalOfPrices) -> {
