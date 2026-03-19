@@ -21,6 +21,7 @@ public class Application {
                 new Product("Game of Thrones", "Books", 20.0),
                 new Product("Harry Potter", "Books", 17.5),
                 new Product("Rarest Book Ever", "Books", 1000.0),
+                new Product("Second Rarest Book Ever", "Books", 1000.0),
                 new Product("Second Rarest Book Ever", "Books", 500.0),
                 new Product("Pacifier", "Baby", 3.0),
                 new Product("Puppet", "Baby", 5.0),
@@ -80,11 +81,18 @@ public class Application {
         System.out.println("PRODUCTS LIST");
         productsList1.forEach(product -> System.out.println(product));
 
-        List<Product> top3MostExpensiveProducts = productsList1.stream().sorted(Comparator.comparing(Product::getPrice).reversed()).limit(3).toList();
+        List<Product> top3MostExpensiveProducts = productsList1.stream().sorted(Comparator.comparing(Product::getPrice).reversed()).limit(5).toList();
 
 
-        System.out.println("\nTOP 3 MOST EXPENSIVE PRODUCTS");
+        System.out.println("\nTOP 5 MOST EXPENSIVE PRODUCTS");
         top3MostExpensiveProducts.forEach(product -> System.out.println(product));
+
+        Double maxPrice = productsList1.stream().mapToDouble(product -> product.getPrice()).max().getAsDouble();
+
+        List<Product> mostExpensiveProducts = productsList1.stream().filter(product -> product.getPrice().equals(maxPrice)).toList();
+
+        System.out.println("\nMOST EXPENSIVE PRODUCTS");
+        mostExpensiveProducts.forEach(product -> System.out.println(product));
 
         System.out.println("\n---------------------------------------------------------------------------------------------");
         logger.info("EXERCISE 4\n");
@@ -101,7 +109,6 @@ public class Application {
 
         System.out.println("\nAVERAGE COST OF PRODUCTS ORDERED (Total cost/number of products)");
         System.out.println(orderProductsAveragePrice.getAsDouble());
-
 
         System.out.println("\n---------------------------------------------------------------------------------------------");
         logger.info("EXERCISE 5\n");
