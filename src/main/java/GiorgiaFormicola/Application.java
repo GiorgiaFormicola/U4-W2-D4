@@ -49,19 +49,34 @@ public class Application {
                 new Order(productsList2, customer3)
         );
 
-        logger.info("EXERCISE 1");
+        logger.info("EXERCISE 1\n");
 
-        System.out.println("\nORDERS LIST");
+        System.out.println("ORDERS LIST");
         ordersList.forEach(order -> System.out.println(order));
 
-        Map<Customer, List<Order>> ordersByCustomer = ordersList.stream().collect(Collectors.groupingBy(order -> order.getCustomer()));
+        Map<Customer, List<Order>> ordersByCustomer = ordersList
+                .stream()
+                .collect(Collectors.groupingBy(order -> order.getCustomer()));
 
         System.out.println("\nORDERS GROUPED BY CUSTOMERS");
         ordersByCustomer.forEach(((customer, orders) -> {
-            System.out.println("Customer: " + customer.getName());
+            System.out.println("CUSTOMER: " + customer.getName());
             orders.forEach(order -> System.out.println("OrderID = " + order.getId() + " -> Products List: " + order.getProducts().stream().map(product -> product.getName()).toList()));
         }));
-        
+
+        System.out.println();
+        logger.info("EXERCISE 2\n");
+        System.out.println("ORDERS LIST");
+        ordersList.forEach(order -> System.out.println("Order ID = " + order.getId() + ", Customer = " + order.getCustomer().getName() + " -> Total Cost: " + order.calculateTotalCost()));
+
+        Map<Customer, Double> orderTotalSpendingForEachCustomer = ordersList
+                .stream()
+                .collect(Collectors.groupingBy(order -> order.getCustomer(), Collectors.summingDouble(order -> order.calculateTotalCost())));
+
+        System.out.println("\nCUSTOMER TOTAL SPENDING");
+        orderTotalSpendingForEachCustomer.forEach((customer, totalSpending) -> System.out.println("Customer = " + customer.getName() + " -> Total Spending: " + totalSpending));
+
+
         System.out.println();
         logger.info("APPLICATION ENDED");
     }

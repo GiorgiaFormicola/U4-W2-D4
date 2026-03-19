@@ -56,15 +56,12 @@ public class Order {
         return customer;
     }
 
-    /*@Override
-    public String toString() {
-        return "Order {" +
-                "id=" + id +
-                ", status='" + status + '\'' +
-                ", orderDate=" + orderDate +
-                ", deliveryDate=" + deliveryDate +
-                '}';
-    }*/
+    public Double calculateTotalCost() {
+        return products.stream().mapToDouble(product -> product.getPrice()).sum();
+    }
+
+    ;
+
 
     @Override
     public String toString() {
