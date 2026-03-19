@@ -97,6 +97,12 @@ public class Application {
         System.out.println("\nAVERAGE COST OF THE ORDERS");
         System.out.println(ordersAverageCost.getAsDouble());
 
+        OptionalDouble orderProductsAveragePrice = ordersList.stream().map(order -> order.getProducts()).flatMap(products -> products.stream()).mapToDouble(product -> product.getPrice()).average();
+
+        System.out.println("\nAVERAGE COST OF PRODUCTS ORDERED");
+        System.out.println(orderProductsAveragePrice.getAsDouble());
+
+
         System.out.println("\n---------------------------------------------------------------------------------------------");
         logger.info("EXERCISE 5\n");
         System.out.println("PRODUCTS LIST");
